@@ -10,3 +10,4 @@ wandb/
 .vscode/
 logdir/
 .DS_Store
+/docs/static/videos/

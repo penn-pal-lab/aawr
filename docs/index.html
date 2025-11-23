@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="">
+  <meta name="description" content="">
   <meta name="keywords" content="">
   <meta property="og:image" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,17 +19,85 @@
     gtag('config', 'G-E0GWRL87RE');
   </script> -->
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.ico">
+  <style>
+    .video-grid {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 1.5rem;
+    }
+
+    .video-card {
+      background: transparent;
+      border: none;
+      padding: 0;
+      box-shadow: none;
+      transition: transform 150ms ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .video-card video {
+      width: 100%;
+      border-radius: 0;
+      background: #111;
+      display: block;
+    }
+
+    .video-card .label {
+      margin-top: 0.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1f2933;
+      letter-spacing: 0.01em;
+    }
+
+    .video-grid-note {
+      margin-top: 0.5rem;
+      color: #4a5568;
+      font-size: 0.95rem;
+    }
+
+    .video-row {
+      margin-top: 1.5rem;
+    }
+
+    .video-card.full {
+      width: 100%;
+    }
+
+    .teaser-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      background: #0f0f0f;
+      border-radius: 0;
+    }
+
+    .teaser-wrap video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+  </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -37,97 +105,99 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
+
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://edwardshu.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
       </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://edwardshu.com">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
         </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://penn-pal-lab.github.io/peg/">
-            Planning Goals for Exploration (ICLR23 Spotlight)
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
           </a>
-          <a class="navbar-item" href="https://edwardshu.com/rac">
-            Robot-aware Control (ICLR22)
-          </a>
-          <a class="navbar-item" href="https://sites.google.com/view/lirf-corl-2022/">
-            Interactive Reward Functions (CoRL22 Best Paper Award)
-          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://penn-pal-lab.github.io/peg/">
+              Planning Goals for Exploration (ICLR23 Spotlight)
+            </a>
+            <a class="navbar-item" href="https://edwardshu.com/rac">
+              Robot-aware Control (ICLR22)
+            </a>
+            <a class="navbar-item" href="https://sites.google.com/view/lirf-corl-2022/">
+              Interactive Reward Functions (CoRL22 Best Paper Award)
+            </a>
+          </div>
         </div>
       </div>
+
     </div>
-
-  </div>
-</nav>
+  </nav>
 
 
-<section class="hero" style="padding-bottom: 1rem;">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-2 publication-title">Real World Reinforcement Learning of Active Perception Behaviors</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://www.edwardshu.com">Edward S. Hu</a><sup>*,1</sup>,</span>
-            <span class="author-block">
-              <a href="https://everloom-129.github.io/">Jie Wang</a><sup>*,1</sup>,</span>
-            <span class="author-block">
-              Xingfang Yuan<sup>*,1</sup>,</span>
-            <span class="author-block">
-              Fiona Luo<sup>1</sup>,</span>
-            <span class="author-block">
-              Muyao Li<sup>1</sup>
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://people.montefiore.uliege.be/lambrechts/">Gaspard Lambrechts</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://people.eecs.berkeley.edu/~oleh/">Oleh Rybkin</a><sup>3</sup>,</span>
-            <span class="author-block">
-              <a href="https://www.seas.upenn.edu/~dineshj/">Dinesh Jayaraman</a><sup>1</sup>
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>*</sup> Equal contribution</span>
-            <span class="author-block"><sup>1</sup>University of Pennsylvania</span>
-            <span class="author-block"><sup>2</sup>University of Liège</span>
-            <span class="author-block"><sup>3</sup>UC Berkeley</span>
-          </div>
-
+  <section class="hero" style="padding-bottom: 1rem;">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
           <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a target="_blank" href="https://openreview.net/forum?id=RkdTtznSAL"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
+            <h1 class="title is-2 publication-title">Real World Reinforcement Learning of Active Perception Behaviors
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.edwardshu.com">Edward S. Hu</a><sup>*,1</sup>,</span>
+              <span class="author-block">
+                <a href="https://everloom-129.github.io/">Jie Wang</a><sup>*,1</sup>,</span>
+              <span class="author-block">
+                Xingfang Yuan<sup>*,1</sup>,</span>
+              <span class="author-block">
+                Fiona Luo<sup>1</sup>,</span>
+              <span class="author-block">
+                Muyao Li<sup>1</sup>
               </span>
-              <!-- Video Link. -->
-              <!-- <span class="link-block">
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://people.montefiore.uliege.be/lambrechts/">Gaspard Lambrechts</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://people.eecs.berkeley.edu/~oleh/">Oleh Rybkin</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.seas.upenn.edu/~dineshj/">Dinesh Jayaraman</a><sup>1</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>*</sup> Equal contribution</span>
+              <span class="author-block"><sup>1</sup>University of Pennsylvania</span>
+              <span class="author-block"><sup>2</sup>University of Liège</span>
+              <span class="author-block"><sup>3</sup>UC Berkeley</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a target="_blank" href="https://openreview.net/forum?id=RkdTtznSAL"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
                 <a target="_blank" href="https://openreview.net/pdf?id=djJLvSur1jZ"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -136,145 +206,186 @@
                   <span>Video</span>
                 </a>
               </span> -->
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a target="_blank" href="https://github.com/penn-pal-lab/aawr"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a target="_blank" href="https://github.com/penn-pal-lab/aawr"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
                       <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
+                    </span>
+                    <span>Code</span>
                   </a>
-              </span>
-            </div>
+                </span>
+              </div>
 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0rem; padding-bottom: 0rem; margin-top: -2rem;">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <!-- Teaser Video Placeholder -->
+          <div style="margin-bottom: 2rem;">
+            <div class="teaser-wrap">
+              <video src="static/videos/franka/AAWR_release_1118.mp4" controls muted loop playsinline></video>
+            </div>
+          </div>
+          <!-- TLDR Blurb -->
+          <div class="content has-text-justified">
+            <p style="font-size:125%;">
+              TL;DR: We propose a simple robot learning recipe leveraging privileged information to train active
+              perception policies on real robots.
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" style="padding-top: 0rem; padding-bottom: 0rem; margin-top: -2rem;">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full">
-        <!-- Teaser Video Placeholder -->
-        <div style="margin-bottom: 2rem;">
-          <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #f0f0f0; border-radius: 8px;">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #999; font-size: 1.2rem;">
-              Teaser Video Placeholder
+
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Method</h2>
+          <div class="content has-text-justified">
+            <p style="font-size:125%;">
+              <!-- Placeholder for method content -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Sec 1: VLA handoff experiment</h2>
+          <div class="content has-text-justified">
+            <p style="font-size:125%;">
+              <!-- Placeholder for VLA handoff experiment content -->
+
+              For each section think about high level takeaways to present.
+
+              Try using https://modelviewer.dev/ to embed GLB files to show the different scenes created by AAWR, BC,
+              etc.
+            </p>
+
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Subsection 1</h3>
+            <div class="video-grid">
+              <div class="video-card">
+                <video src="static/videos/franka/franka_complex_1.MP4" controls muted loop playsinline></video>
+                <div class="label">Dummy label 1</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/franka_complex_2.MP4" controls muted loop playsinline></video>
+                <div class="label">Dummy label 2</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/franka_complex_3.MP4" controls muted loop playsinline></video>
+                <div class="label">Dummy label 3</div>
+              </div>
+            </div>
+            <p class="video-grid-note">Swap the <code>src</code> values above with your video file paths (mp4/webm).
+              Controls, mute, and looping stay wired up.</p>
+
+            <h3 class="title is-4" style="margin-top: 2rem;">Subsection 2</h3>
+            <div class="video-row">
+              <div class="video-card full">
+                <video src="static/videos/franka/franka_complex_4.mp4" controls muted loop playsinline></video>
+                <div class="label">AAWR</div>
+              </div>
+            </div>
+            <div class="video-grid" style="margin-top: 1rem;">
+              <div class="video-card">
+                <video src="static/videos/franka/AWR_hard.mp4" controls muted loop playsinline></video>
+                <div class="label">AWR</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/BC_hard.mp4" controls muted loop playsinline></video>
+                <div class="label">BC</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/Openloop_hard2.mp4" controls muted loop playsinline></video>
+                <div class="label">Openloop(?)</div>
+              </div>
             </div>
           </div>
         </div>
-        <!-- TLDR Blurb -->
-        <div class="content has-text-justified">
-          <p style="font-size:125%;">
-            TL;DR: We propose a simple robot learning recipe leveraging privileged information to train active perception policies on real robots.
-          </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Sec 2: Koch real world RL experiment</h2>
+          <div class="content has-text-justified">
+            <p style="font-size:125%;">
+              <!-- Placeholder for Koch real world RL experiment content -->
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full">
-        <h2 class="title is-3">Method</h2>
-        <div class="content has-text-justified">
-          <p style="font-size:125%;">
-            <!-- Placeholder for method content -->
-          </p>
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Sec 3: Other simulated experiments</h2>
+          <div class="content has-text-justified">
+            <p style="font-size:125%;">
+              <!-- Placeholder for other simulated experiments content -->
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full">
-        <h2 class="title is-3">Sec 1: VLA handoff experiment</h2>
-        <div class="content has-text-justified">
-          <p style="font-size:125%;">
-            <!-- Placeholder for VLA handoff experiment content -->
+  </section>
 
-            For each section think about high level takeaways to present. 
-
-            Try using https://modelviewer.dev/ to embed GLB files to show the different scenes created by AAWR, BC, etc.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full">
-        <h2 class="title is-3">Sec 2: Koch real world RL experiment</h2>
-        <div class="content has-text-justified">
-          <p style="font-size:125%;">
-            <!-- Placeholder for Koch real world RL experiment content -->
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full">
-        <h2 class="title is-3">Sec 3: Other simulated experiments</h2>
-        <div class="content has-text-justified">
-          <p style="font-size:125%;">
-            <!-- Placeholder for other simulated experiments content -->
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <!-- <a class="icon-link"
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <!-- <a class="icon-link"
          href="./static/videos/nerfies_paper.pdf">
         <i class="fas fa-file-pdf"></i>
       </a> -->
-      <a class="icon-link" href="https://github.com/hueds" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            Template taken from <a
-              href="https://github.com/nerfies/nerfies.github.io">here</a>. GPT-4 also assisted in the development of this site.
+        <a class="icon-link" href="https://github.com/hueds" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              Template taken from <a href="https://github.com/nerfies/nerfies.github.io">here</a>. GPT-4 also assisted
+              in the development of this site.
 
-          </p>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script>
-// Placeholder for future scripts
-</script>
+  <script>
+    // Placeholder for future scripts
+  </script>
 
 </body>
+
 </html>
