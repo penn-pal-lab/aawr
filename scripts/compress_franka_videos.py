@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import sys
 
-INPUT_DIR = Path("docs/static/videos/franka_local")
+INPUT_DIR = Path("docs/static/videos/franka/to_compress")
 OUTPUT_DIR = INPUT_DIR / "compressed"
 VIDEO_EXTS = {".mp4", ".mov"}
 

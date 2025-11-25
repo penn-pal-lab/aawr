@@ -277,6 +277,27 @@
               etc.
             </p>
 
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Task Setup</h3>
+            <div class="columns is-vcentered" style="margin-bottom: 1.75rem;">
+              <div class="column is-half">
+                <figure class="image">
+                  <img src="static/images/concept.png" alt="Task Setup">
+                </figure>
+              </div>
+              <div class="column">
+                <div class="content has-text-justified" style="font-size: 110%;">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <h3 class="title is-4" style="margin-top: 1.5rem;">Subsection 1</h3>
             <div class="video-grid">
               <div class="video-card">
@@ -288,7 +309,7 @@
                 <div class="label">Dummy label 2</div>
               </div>
               <div class="video-card">
-                <video src="static/videos/franka/franka_complex_3_web.MP4" autoplay muted loop playsinline></video>
+                <video src="static/videos/franka/franka_complex_3_web.mp4" autoplay muted loop playsinline></video>
                 <div class="label">Dummy label 3</div>
               </div>
             </div>
@@ -296,10 +317,29 @@
               Autoplay, mute, and looping stay wired up.</p>
 
             <h3 class="title is-4" style="margin-top: 2rem;">Subsection 2</h3>
-            <div class="video-row">
-              <div class="video-card full">
-                <video src="static/videos/franka/franka_complex_4_web.MP4" autoplay muted loop playsinline></video>
-                <div class="label">AAWR</div>
+            <div class="columns" style="margin-top: 1rem;">
+              <div class="column is-half">
+                <div class="video-card">
+                  <video src="static/videos/franka/franka_complex_4_web.MP4" autoplay muted loop playsinline></video>
+                  <div class="label">AAWR</div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="content has-text-justified" style="font-size: 110%;">
+                  <p>
+                    Dummy copy for the main roll-out description. Note the starting pose, target object, and the broad
+                    steps the policy takes before the handoff happens.
+                  </p>
+                  <p>
+                    Add any quick takeaways here, e.g., “policy re-centers twice to reduce occlusion and nails the final
+                    grasp.”
+                  </p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  </p>
+                </div>
               </div>
             </div>
             <div class="video-grid" style="margin-top: 1rem;">
@@ -318,22 +358,22 @@
             </div>
 
             <h3 class="title is-4" style="margin-top: 2rem;">Subsection 3</h3>
-            <div class="video-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+            <div class="video-grid" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
               <div class="video-card">
                 <video src="static/videos/franka/hard_aawr_s1.mp4" autoplay muted loop playsinline></video>
-                <div class="label">VLA extra 1</div>
+                <div class="label">Complex Search</div>
               </div>
               <div class="video-card">
                 <video src="static/videos/franka/vert_aawr_s2.mp4" autoplay muted loop playsinline></video>
-                <div class="label">VLA extra 2</div>
+                <div class="label">Shelf Search</div>
               </div>
               <div class="video-card">
                 <video src="static/videos/franka/dual_aawr_s2.mp4" autoplay muted loop playsinline></video>
-                <div class="label">VLA extra 3</div>
+                <div class="label">Drawer Search</div>
               </div>
               <div class="video-card">
                 <video src="static/videos/franka/duck_aawr_s1.mp4" autoplay muted loop playsinline></video>
-                <div class="label">VLA extra 4</div>
+                <div class="label">Duck Search</div>
               </div>
             </div>
           </div>
@@ -351,6 +391,65 @@
             <p style="font-size:125%;">
               <!-- Placeholder for Koch real world RL experiment content -->
             </p>
+
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Subsection 1</h3>
+            <div class="video-row">
+              <div class="video-card full">
+                <video src="static/videos/franka/franka_complex_4_web.MP4" autoplay muted loop playsinline></video>
+                <div class="label">Koch rollout overview</div>
+              </div>
+            </div>
+
+            <h3 class="title is-4" style="margin-top: 2rem;">Subsection 2</h3>
+            <div class="columns" style="margin-top: 1rem;">
+              <div class="column is-half">
+                <figure class="image">
+                  <img src="static/images/method.png" alt="Koch task illustration">
+                </figure>
+              </div>
+              <div class="column">
+                <div class="content has-text-justified" style="font-size: 110%;">
+                  <p>
+                    Briefly describe the task setup, object of interest, and what success looks like. Note any special
+                    sensing or constraints (e.g., partial observability, required re-positioning) that shape the policy.
+                  </p>
+                  <p>
+                    Add quick takeaways such as how the controller sequences coarse alignment with close-range
+                    refinement, or where active perception steps in to resolve ambiguity.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="title is-4" style="margin-top: 2rem;">Subsection 3</h3>
+            <div class="video-grid" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+              <div class="video-card">
+                <video src="static/videos/franka/franka_complex_1_web.MP4" autoplay muted loop playsinline></video>
+                <div class="label">Trial 1</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/franka_complex_2_web.MP4" autoplay muted loop playsinline></video>
+                <div class="label">Trial 2</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/franka_complex_3_web.mp4" autoplay muted loop playsinline></video>
+                <div class="label">Trial 3</div>
+              </div>
+            </div>
+            <div class="video-grid" style="grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 1rem;">
+              <div class="video-card">
+                <video src="static/videos/franka/AWR_hard_web.mp4" autoplay muted loop playsinline></video>
+                <div class="label">Trial 4</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/BC_hard_web.mp4" autoplay muted loop playsinline></video>
+                <div class="label">Trial 5</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/Openloop_hard2_web.mp4" autoplay muted loop playsinline></video>
+                <div class="label">Trial 6</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
