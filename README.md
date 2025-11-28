@@ -39,7 +39,7 @@ python src/train_il.py agent=asym_awr modality=all task=gymnasium_xarm_lift data
 ```
 
 ## References and Acknowledgements
-- FOWM codebase: AAWR is built on top of the FOWM codebase
+- [FOWM codebase](https://github.com/yunhaif/fowm): AAWR is built on top of the FOWM codebase
 
 If you find our project helpful, please cite us:
 ```
