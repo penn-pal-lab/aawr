@@ -274,7 +274,6 @@
               </div>
             </div>
           </div>
-          <!-- <video src="static/videos/franka/AAWR_release_1118_web.mp4" autoplay muted loop playsinline></video> -->
           <!-- TLDR Blurb -->
           <div class="content has-text-justified">
             <p style="font-size:125%;">
@@ -307,10 +306,10 @@
                 </figure>
               </div>
             </div>
-            <div class="content has-text-justified" style="font-size: 110%;">
+            <div class="content has-text-justified" style="font-size: 125%;">
               <p>
-                Our method, Asymmetric Advantage Weighted Regression (AAWR), uses privileged information to learn  high-quality value functions, which results in a more accurate advantage-weighted BC loss. This leads to better policy extraction in POMDPs compared to BC and unprivileged AWR. 
-                AAWR inherits the versatility of AWR, which allows it to be applied to offline data (demonstrations, play data) and online data using the same update. 
+                Our method, Asymmetric Advantage Weighted Regression (AAWR), uses privileged information to learn  high-quality value functions. The value functions are used to compute advantage estimates, which are used as weights in the weighted BC loss, leading to better policy extraction in POMDPs compared to BC and unprivileged AWR. 
+                AAWR inherits the versatility of AWR, which can be applied to both offline data (demonstrations, play data) and online data using the same update. 
               </p>
             </div>
 
