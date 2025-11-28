@@ -1,0 +1,19 @@
+modality: 'all'
+priv_modalities: ['state']
+# changed action dim from 7 to 6 back to 7; changed to 6 in the script
+action_dim: 7
+action_repeat: 1
+discount: 0.99
+episode_length: 300
+train_steps: 50000
+offline_steps: 20000
+max_buffer_size: 10000
+expectile: 0.9
+A_scaling: 3.0
+iterations: 6
+uncertainty_cost: 1
+eval_freq: 2000
+save_freq: 200000
+eval_episodes: 40
+offline_model_path: None
+filter_demos: false
