@@ -231,9 +231,11 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
           <!-- Teaser Video Placeholder -->
-          <div style="margin-bottom: 2rem;">
-            <div class="teaser-wrap">
-              <iframe src="https://www.youtube.com/embed/Cq0oSVgTezw?si=IDlgWaUSneATuANX&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="column is-two-thirds">
+              <div class="teaser-wrap">
+                <iframe src="https://www.youtube.com/embed/Cq0oSVgTezw?si=IDlgWaUSneATuANX&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
             </div>
           </div>
           <!-- <video src="static/videos/franka/AAWR_release_1118_web.mp4" autoplay muted loop playsinline></video> -->
@@ -259,6 +261,23 @@
             <p style="font-size:125%;">
               <!-- Placeholder for method content -->
             </p>
+            <div class="columns is-centered" style="margin-bottom: 1.75rem;">
+              <div class="column is-two-thirds">
+                <figure class="image">
+                  <img src="static/images/AAWR_method.png" alt="Method">
+                  <figcaption style="margin-top: 0.5rem; font-size: 90%; text-align: center;">
+                    Top row: The policy receives the partial observation. Bottom row: Privileged observations or state, available only during training, are given to the critic networks to estimate the advantage. The advantage estimates are used as weights in the loss, providing privileged supervision to the policy.
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="content has-text-justified" style="font-size: 110%;">
+              <p>
+                Our method, Asymmetric Advantage Weighted Regression (AAWR), uses privileged information to learn  high-quality value functions, which results in a more accurate advantage-weighted BC loss. This leads to better policy extraction in POMDPs compared to BC and unprivileged AWR. 
+                AAWR inherits the versatility of AWR, which allows it to be applied to offline data (demonstrations, play data) and online data using the same update. 
+              </p>
+            </div>
+
           </div>
         </div>
       </div>
