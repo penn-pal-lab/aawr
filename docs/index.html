@@ -24,7 +24,10 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.ico">
@@ -97,13 +100,56 @@
       display: block;
       background: #000;
     }
+
+    .vggt-box {
+      background: #f7f7f8;
+      border-radius: 0.75rem;
+      border: 1px solid #d8d8dd;
+      padding: 1.25rem 1.25rem 1.5rem;
+      color: #1a1a1a;
+      font-size: 0.95rem;
+    }
+
+    .vggt-box .button {
+      font-size: 1rem !important;
+      padding: 0.45rem 0.9rem;
+    }
+    
+    .vggt-controls-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #4a4a4a;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+    
+    #vggt-timestep-label {
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+      color: #1a1a1a;            
+      font-size: 0.95rem;
+    }
+    
+    #vggt-timeline {
+      font-size: 0.78rem;
+      margin-top: 0.25rem;
+      color: #555;
+      line-height: 1.4;
+    }
+    
+    #vggt-timestep {
+      width: 100%;
+    }
   </style>
+  
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
 
 <body>
@@ -189,27 +235,17 @@
                 <!-- PDF Link. -->
                 <span class="link-block">
                   <a target="_blank" href="https://openreview.net/forum?id=RkdTtznSAL"
-                    class="external-link button is-normal is-rounded is-dark">
+                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                     </span>
                     <span>Paper</span>
                   </a>
                 </span>
-                <!-- Video Link. -->
-                <!-- <span class="link-block">
-                <a target="_blank" href="https://openreview.net/pdf?id=djJLvSur1jZ"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span> -->
                 <!-- Code Link. -->
                 <span class="link-block">
                   <a target="_blank" href="https://github.com/penn-pal-lab/aawr"
-                    class="external-link button is-normal is-rounded is-dark">
+                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -270,11 +306,6 @@
           <div class="content has-text-justified">
             <p style="font-size:125%;">
               <!-- Placeholder for VLA handoff experiment content -->
-
-              For each section think about high level takeaways to present.
-
-              Try using https://modelviewer.dev/ to embed GLB files to show the different scenes created by AAWR, BC,
-              etc.
             </p>
 
             <h3 class="title is-4" style="margin-top: 1.5rem;">Task Setup</h3>
@@ -376,12 +407,66 @@
                 <div class="label">Duck Search</div>
               </div>
             </div>
-          </div>
+
+            <h3 class="title is-4" style="margin-top: 2.5rem;">Subsection 4</h3>
+            <div class="vggt-box">
+              <div class="columns">
+                <div class="column is-two-thirds">
+                  <model-viewer id="vggt-viewer"
+                                src="static/glb/wrist_video_0.glb"
+                                alt="VGGT reconstruction from wrist camera"
+                                camera-controls
+                                touch-action="pan-y"
+                                autoplay
+                                shadow-intensity="0.7"
+                                exposure="1.0"
+                                environment-image="neutral"
+                                interaction-prompt="auto"
+                                loading="eager"
+                                style="width: 100%; height: 420px; background-color: #000;">
+                  </model-viewer>
+                  <p style="font-size: 0.95rem; color: #4a4a4a; margin-top: 0.4rem;">
+                    Drag to rotate. Scroll or pinch to zoom.
+                  </p>                  
+                </div>
+
+                <div class="column is-one-third" style="text-align: left;">
+                  <p class="vggt-controls-label">View mode</p>
+                  <div class="buttons has-addons is-centered" style="margin-bottom: 0.9rem;">
+                    <button class="button is-small vggt-mode-btn is-link is-light" data-mode="long">
+                      Long horizon
+                    </button>
+                    <button class="button is-small vggt-mode-btn" data-mode="fixation">
+                      Fixation
+                    </button>
+                  </div>
+
+                  <p class="vggt-controls-label">Timestep</p>
+                  <input id="vggt-timestep" type="range" min="0" max="12" step="1" value="0">
+                  <p id="vggt-timestep-label">Long horizon · t = 0</p>
+
+                  <p class="vggt-controls-label" style="margin-top: 0.9rem;">All timesteps</p>
+                  <p id="vggt-timeline">
+                    0 · 10 · 20 · 30 · 40 · 50 · 60 · 70 · 80 · 90 · 100 · 110 · 113
+                  </p>
+
+                  <button id="vggt-play"
+                          class="button is-small is-fullwidth"
+                          style="margin-top: 1rem;">
+                    <span class="icon is-small"><i class="fas fa-play"></i></span>
+                    <span>Play</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- /.content -->
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Sec 2 -->
   <section class="section">
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
@@ -450,12 +535,13 @@
                 <div class="label">Trial 6</div>
               </div>
             </div>
-          </div>
+          </div> <!-- /.content -->
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Sec 3 -->
   <section class="section">
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
@@ -474,10 +560,6 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <!-- <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a> -->
         <a class="icon-link" href="https://github.com/hueds" class="external-link" disabled>
           <i class="fab fa-github"></i>
         </a>
@@ -487,13 +569,12 @@
           <div class="content">
             <p>
               This website is licensed under a <a rel="license"
-                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                                                  href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
                 Commons Attribution-ShareAlike 4.0 International License</a>.
             </p>
             <p>
               Template taken from <a href="https://github.com/nerfies/nerfies.github.io">here</a>. GPT-4 also assisted
               in the development of this site.
-
             </p>
           </div>
         </div>
@@ -502,7 +583,133 @@
   </footer>
 
   <script>
-    // Placeholder for future scripts
+    // VGGT sequence controls: mode toggle, slider, and play loop
+    document.addEventListener("DOMContentLoaded", function () {
+      const viewer = document.getElementById("vggt-viewer");
+      const modeButtons = Array.from(document.querySelectorAll(".vggt-mode-btn"));
+      const slider = document.getElementById("vggt-timestep");
+      const label = document.getElementById("vggt-timestep-label");
+      const timeline = document.getElementById("vggt-timeline");
+      const playBtn = document.getElementById("vggt-play");
+
+      if (!viewer || !slider || !label || !timeline || !playBtn) {
+        return;
+      }
+
+      // Timesteps
+      const longTimesteps = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 113];
+      const fixationTimesteps = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 115];
+
+      let mode = "long";
+      let timesteps = longTimesteps;
+      let index = 0;
+      let playing = false;
+      let intervalId = null;
+
+      function filenameFor(currentMode, t) {
+        if (currentMode === "long") {
+          return "static/glb/wrist_video_" + t + ".glb";
+        } else {
+          return "static/glb/pitch_180_wrist_video_" + t + ".glb";
+        }
+      }
+
+      function updateTimeline() {
+        const arr = timesteps;
+        timeline.textContent = arr.join(" · ");
+      }
+
+      function refreshViewer() {
+        const t = timesteps[index];
+        if (t === undefined) return;
+
+        viewer.src = filenameFor(mode, t);
+        label.textContent = (mode === "long" ? "Long horizon" : "Fixation") + " · t = " + t;
+        slider.max = String(timesteps.length - 1);
+        slider.value = String(index);
+      }
+
+      function stopPlaying() {
+        playing = false;
+        if (intervalId !== null) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+        // update button icon/text
+        const icon = playBtn.querySelector("i");
+        const spanText = playBtn.querySelector("span:last-child");
+        if (icon) {
+          icon.classList.remove("fa-pause");
+          icon.classList.add("fa-play");
+        }
+        if (spanText) {
+          spanText.textContent = "Play";
+        }
+      }
+
+      function startPlaying() {
+        stopPlaying();
+        playing = true;
+        const icon = playBtn.querySelector("i");
+        const spanText = playBtn.querySelector("span:last-child");
+        if (icon) {
+          icon.classList.remove("fa-play");
+          icon.classList.add("fa-pause");
+        }
+        if (spanText) {
+          spanText.textContent = "Pause";
+        }
+
+        intervalId = setInterval(() => {
+          index = (index + 1) % timesteps.length;
+          refreshViewer();
+        }, 500);
+      }
+
+      // Mode toggle buttons
+      modeButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const newMode = btn.getAttribute("data-mode");
+          if (!newMode || newMode === mode) return;
+
+          mode = newMode;
+          timesteps = (mode === "long") ? longTimesteps : fixationTimesteps;
+          index = 0;
+          stopPlaying();
+
+          // Update active button styles
+          modeButtons.forEach(b => b.classList.remove("is-link", "is-light"));
+          btn.classList.add("is-link", "is-light");
+
+          updateTimeline();
+          refreshViewer();
+          startPlaying();
+        });
+      });
+
+      // Slider scrub
+      slider.addEventListener("input", () => {
+        const v = parseInt(slider.value, 10);
+        if (!isNaN(v)) {
+          index = v;
+          refreshViewer();
+        }
+      });
+
+      // Play / Pause button
+      playBtn.addEventListener("click", () => {
+        if (playing) {
+          stopPlaying();
+        } else {
+          startPlaying();
+        }
+      });
+
+      // Initial state
+      updateTimeline();
+      refreshViewer();
+      startPlaying();
+    });
   </script>
 
 </body>
