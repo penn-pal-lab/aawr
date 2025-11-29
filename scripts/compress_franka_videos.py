@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import sys
 
-INPUT_DIR = Path("docs/static/videos/franka/to_compress")
+INPUT_DIR = Path("docs/static/videos/to_compress")
 OUTPUT_DIR = INPUT_DIR / "compressed"
 VIDEO_EXTS = {".mp4", ".mov"}
 
@@ -21,19 +21,19 @@ def compress_one(src: Path, dst: Path) -> int:
       "-i",
       str(src),
       "-vf",
-      "scale=min(1280\\,iw):-2",
+      "scale=min(1920\\,iw):-2",
       "-c:v",
       "libx264",
       "-preset",
-      "slow",
+      "medium",
       "-crf",
-      "28",
+      "20",
       "-movflags",
       "+faststart",
       "-c:a",
       "aac",
       "-b:a",
-      "96k",
+      "160k",
       str(dst),
   ]
   result = subprocess.run(cmd, capture_output=True)
