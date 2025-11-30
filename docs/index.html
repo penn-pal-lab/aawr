@@ -139,6 +139,9 @@
             <a class="navbar-item" href="https://sites.google.com/view/lirf-corl-2022/">
               Interactive Reward Functions (CoRL22 Best Paper Award)
             </a>
+            <a class="navbar-item" href="https://penn-pal-lab.github.io/Pi0-Experiment-in-the-Wild/">
+              Evaluating Pi0 in the Wild (GRASP Blog)
+            </a>
           </div>
         </div>
       </div>
@@ -160,11 +163,11 @@
               <span class="author-block">
                 <a href="https://everloom-129.github.io/">Jie Wang</a><sup>*,1</sup>,</span>
               <span class="author-block">
-                Xingfang Yuan<sup>*,1</sup>,</span>
+                <a href="https://www.linkedin.com/in/xingfang-yuan/">Xingfang Yuan</a><sup>*,1</sup>,</span>
               <span class="author-block">
-                Fiona Luo<sup>1</sup>,</span>
+                <a href="https://www.linkedin.com/in/fionalluo/">Fiona Luo</a><sup>1</sup>,</span>
               <span class="author-block">
-                Muyao Li<sup>1</sup>
+                <a href="https://www.linkedin.com/in/muyao-lilian-li-04750228a/">Muyao Li</a><sup>1</sup>
               </span>
             </div>
 
@@ -172,7 +175,7 @@
               <span class="author-block">
                 <a href="https://people.montefiore.uliege.be/lambrechts/">Gaspard Lambrechts</a><sup>2</sup>,</span>
               <span class="author-block">
-                <a href="https://people.eecs.berkeley.edu/~oleh/">Oleh Rybkin</a><sup>3</sup>,</span>
+                <a href="https://olehrybkin.com/">Oleh Rybkin</a><sup>3</sup>,</span>
               <span class="author-block">
                 <a href="https://www.seas.upenn.edu/~dineshj/">Dinesh Jayaraman</a><sup>1</sup>
               </span>
@@ -198,15 +201,15 @@
                   </a>
                 </span>
                 <!-- Video Link. -->
-                <!-- <span class="link-block">
-                <a target="_blank" href="https://openreview.net/pdf?id=djJLvSur1jZ"
+                <span class="link-block">
+                <a target="_blank" href="https://youtu.be/5zRWUmBhuy8"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
                   </span>
                   <span>Video</span>
                 </a>
-              </span> -->
+              </span>
                 <!-- Code Link. -->
                 <span class="link-block">
                   <a target="_blank" href="https://github.com/penn-pal-lab/aawr"
@@ -217,8 +220,28 @@
                     <span>Code</span>
                   </a>
                 </span>
-              </div>
+                <!-- Data Link. -->
+                <span class="link-block">
+                  <a target="_blank" href="https://huggingface.co/datasets/Everloom/AAWR-DROID"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>Datasets</span>
+                  </a>
+                </span>
+              <span class="link-block">
+                <a target="_blank" href="static/files/AAWR_Poster.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-image"></i>
+                  </span>
+                  <span>Poster</span>
+                </a>
+              </span>
 
+                
+              </div>
             </div>
           </div>
         </div>
@@ -234,7 +257,7 @@
           <div class="columns is-centered" style="margin-bottom: 2rem;">
             <div class="column is-two-thirds">
               <div class="teaser-wrap">
-                <iframe src="https://www.youtube.com/embed/Cq0oSVgTezw?si=IDlgWaUSneATuANX&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe src="https://youtu.be/5zRWUmBhuy8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
             </div>
           </div>
@@ -250,7 +273,25 @@
     </div>
   </section>
 
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p style="font-size:125%;">
+              A robot's instantaneous sensory observations do not always reveal task-relevant state information. Under such partial observability, optimal behavior typically involves explicitly acting to gain the missing information.
+              Today's standard robot learning techniques struggle to produce such active perception behaviors.
+              We propose a simple real-world robot learning recipe to efficiently train active perception policies. Our approach, <strong>advantage weighted regression (AAWR)</strong>, exploits access to <i>“privileged"</i> extra sensors at training time. The privileged sensors enable training high-quality privileged value functions that aid in estimating the advantage of the target policy. Bootstrapping from a small number of potentially suboptimal demonstrations and an easy-to-obtain coarse policy initialization, AAWR quickly acquires active perception behaviors and boosts task performance. In evaluations on 8 manipulation tasks on 3 robots spanning varying degrees of partial observability, AAWR synthesizes reliable active perception behaviors that outperform all prior approaches. When initialized with a <i>“generalist”</i> robot policy that struggles with active perception tasks, AAWR efficiently generates information-gathering behaviors that allow it to operate under severe partial observability for manipulation tasks. Website:<a href="https://penn-pal-lab.github.io/aawr/">penn-pal-lab.github.io/aawr</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+
+  
   <section class="section">
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
@@ -289,36 +330,85 @@
           <h2 class="title is-3">Sec 1: VLA handoff experiment</h2>
           <div class="content has-text-justified">
             <p style="font-size:125%;">
-              <!-- Placeholder for VLA handoff experiment content -->
-
-              For each section think about high level takeaways to present.
-
-              Try using https://modelviewer.dev/ to embed GLB files to show the different scenes created by AAWR, BC,
-              etc.
             </p>
 
             <h3 class="title is-4" style="margin-top: 1.5rem;">Task Setup</h3>
             <div class="columns is-vcentered" style="margin-bottom: 1.75rem;">
               <div class="column is-half">
                 <figure class="image">
-                  <img src="static/images/concept.png" alt="Task Setup">
+                  <img src="static/images/sec1_task_setup.png" alt="Task Setup">
                 </figure>
               </div>
               <div class="column">
                 <div class="content has-text-justified" style="font-size: 110%;">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <strong>Goal:</strong> Learn an active perception “helper” policy that searches for the target under clutter/occlusion, then handoff to a generalist VLA policy (π0) for grasping. π0 itself struggles because it lacks memory and performs poorly on search-like POMDP
                   </p>
                 </div>
               </div>
             </div>
 
-            <h3 class="title is-4" style="margin-top: 1.5rem;">Subsection 1</h3>
+
+          
+
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Switching framework</h3>
+            <p>
+              Run active perception policy first.
+            </p>
+            <p>
+              Periodically run an object detector on wrist RGB; once target is detected across two consecutive checks, switch to π0 for grasp.
+            </p>
+            <figure class="image">
+              <img src="static/images/sec1_sysdiagram.png" alt="Switching Framework">
+            </figure>
+
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Tasks (4 real Franka tasks)</h3>
+            <div class="columns is-vcentered" style="margin-bottom: 1.75rem;">
+              <div class="column is-half">
+                <figure class="image">
+                  <img src="static/images/sec1_task_setup.png" alt="Task Setup">
+                </figure>
+              </div>
+                <div class="column">
+                  <div class="content has-text-justified" style="font-size: 110%;">
+                    <p>
+                      <strong>Bookshelf-P / Bookshelf-D:</strong> target object (toy pineapple / toy duck) placed on one of three shelves; policy must scan shelves vertically & horizontally and stop at good viewpoints.
+                    </p>
+                    <p>
+                      <strong>Shelf-Cabinet:</strong> adds cabinet/drawer hiding spots, increases search complexity.
+                    </p>
+                    <p>
+                      <strong>Complex:</strong> adds an extra bottom shelf that's heavily occluded from side views.
+                    </p>
+                  </div>
+                </div>
+            </div>
+
+            <figure class="image">
+              <img src="static/images/sec1_task_scene.png" alt="Search Scene">
+            </figure>
+
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Sensors / privileged info</h3>
+            <p>
+              <strong>Deployment:</strong> wrist RGB + proprio (partial obs).
+            </p>
+            <p>
+              <strong>Training (privileged for critics):</strong> detection bbox / segmentation masks.
+            </p>
+            <div class="columns is-centered" style="margin-top: 1rem;">
+              <div class="column is-three-quarters">
+                 <div class="video-card">
+                   <video src="static/videos/franka/sec1_reward_wrist.mp4" controls muted loop playsinline></video>
+                 </div>
+              </div>
+            </div>
+            <figure class="image" style="margin-top: 0.8rem;">
+              <img src="static/images/sec1_reward_curve.png" alt="Reward Curve" style="width: 80%;">
+            </figure>
+            <p>
+
+
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Learned Bavior 1: Fixation</h3>
             <div class="video-grid">
               <div class="video-card">
                 <video src="static/videos/franka/franka_complex_1_web.mp4" autoplay muted loop playsinline></video>
@@ -333,10 +423,9 @@
                 <div class="label">Dummy label 3</div>
               </div>
             </div>
-            <p class="video-grid-note">Swap the <code>src</code> values above with your video file paths (mp4/webm).
-              Autoplay, mute, and looping stay wired up.</p>
+            <p class="video-grid-note">Here is some example of the learned behaviors</p>
 
-            <h3 class="title is-4" style="margin-top: 2rem;">Subsection 2</h3>
+            <h3 class="title is-4" style="margin-top: 2rem;">Learned Behavior 2: Search the entire scene more efficient than all baselines</h3>
             <div class="columns" style="margin-top: 1rem;">
               <div class="column is-half">
                 <div class="video-card">
@@ -424,18 +513,16 @@
             <div class="columns" style="margin-top: 1rem;">
               <div class="column is-half">
                 <figure class="image">
-                  <img src="static/images/method.png" alt="Koch task illustration">
+                  <img src="static/images/sec2_koch_setup.jpg" alt="Koch task illustration">
                 </figure>
               </div>
               <div class="column">
                 <div class="content has-text-justified" style="font-size: 110%;">
                   <p>
-                    Briefly describe the task setup, object of interest, and what success looks like. Note any special
-                    sensing or constraints (e.g., partial observability, required re-positioning) that shape the policy.
+                    Task: Real-world “Blind Pick” on Koch robot: pick objects under severe partial observability (policy input is limited; critics have privileged estimates). Task and training recipe follow the same AAWR idea and can be trained offline-to-online.
                   </p>
                   <p>
-                    Add quick takeaways such as how the controller sequences coarse alignment with close-range
-                    refinement, or where active perception steps in to resolve ambiguity.
+                    <strong>Sensors / data regime:</strong> Partial obs: joints + initial object position (policy input); Privileged obs (training): object position estimate; Reward: dense; Demos: 100 suboptimal; Offline steps 20K; Online steps 1.2K
                   </p>
                 </div>
               </div>
@@ -466,11 +553,64 @@
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
-          <h2 class="title is-3">Sec 3: Other simulated experiments</h2>
+          <h2 class="title is-3">Sec 3: Simulation Experiment</h2>
           <div class="content has-text-justified">
             <p style="font-size:125%;">
-              <!-- Placeholder for other simulated experiments content -->
+              We developed AAWR on simulation first, and we selected 3 different tasks with varied sensor setups and degrees of partial observability to test the best practice of privileged reward design.
             </p>
+            
+            <div class="columns is-centered" style="margin-top: 2rem;">
+              <!-- Camouflage Pick -->
+              <div class="column is-one-third">
+                <div class="card" style="height: 100%; border: none; box-shadow: none;">
+                  <div class="card-content has-text-centered" style="padding: 0.5rem;">
+                    <h4 class="title is-5">Camouflage Pick (Sim)</h4>
+                    <p style="margin-bottom: 1rem; font-size: 95%;">
+                      Hard because object is barely visible; privileged true object position helps critics.
+                    </p>
+                    <div class="video-card" style="margin-bottom: 1rem;">
+                      <video src="static/videos/sim/camouflage_pick.mp4" controls muted loop playsinline></video>
+                    </div>
+                    <!-- <figure class="image">
+                      <img src="static/images/sim/learning_curve_fig5.png" alt="Learning Curve">
+                    </figure> -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fully Obs Pick -->
+              <div class="column is-one-third">
+                <div class="card" style="height: 100%; border: none; box-shadow: none;">
+                   <div class="card-content has-text-centered" style="padding: 0.5rem;">
+                    <h4 class="title is-5">Fully Obs Pick (Sim)</h4>
+                    <p style="margin-bottom: 1rem; font-size: 95%;">
+                      Even when fully observable, AAWR can still help because privileged critics don't need to learn object localization from pixels.
+                    </p>
+                    <div class="video-card">
+                      <video src="static/videos/sim/fully_obs_pick.mp4" controls muted loop playsinline></video>
+                    </div>
+                    <!-- <figure class="image">
+                      <img src="static\images\sim\fully_obs_pick_learning_curve.png" alt="Learning Curve">
+                    </figure> -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Active Perception Koch -->
+              <div class="column is-one-third">
+                 <div class="card" style="height: 100%; border: none; box-shadow: none;">
+                   <div class="card-content has-text-centered" style="padding: 0.5rem;">
+                    <h4 class="title is-5">Active Perception Koch (Sim)</h4>
+                    <p style="margin-bottom: 1rem; font-size: 95%;">
+                      Only AAWR reaches 100% by learning to scan workspace effectively; compare to distillation / VIB.
+                    </p>
+                    <div class="video-card">
+                      <video src="static/videos/sim/active_perception_koch.mp4" controls muted loop playsinline></video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -497,7 +637,7 @@
                 Commons Attribution-ShareAlike 4.0 International License</a>.
             </p>
             <p>
-              Template taken from <a href="https://github.com/nerfies/nerfies.github.io">here</a>. GPT-4 also assisted
+              Template taken from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. Generative AI also assisted
               in the development of this site.
 
             </p>
