@@ -257,7 +257,7 @@
           <div class="columns is-centered" style="margin-bottom: 2rem;">
             <div class="column is-two-thirds">
               <div class="teaser-wrap">
-                <iframe src="https://youtu.be/5zRWUmBhuy8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/5zRWUmBhuy8?si=FI5ZXYEJR9iWXwHt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
             </div>
           </div>
@@ -267,28 +267,22 @@
               TL;DR: We propose a simple robot learning recipe leveraging privileged information to train active
               perception policies on real robots.
             </p>
+            <p style="font-size:125%; margin-top: 0.5rem;">
+              <span id="abstract-toggle-text" style="cursor: pointer; color: #3273dc; text-decoration: underline;" onclick="toggleAbstract()">Click here to expand full abstract</span>
+            </p>
+            <div id="abstract-content" class="content has-text-justified" style="display: none; margin-top: 1rem;">
+              <p style="font-size:125%;">
+                A robot's instantaneous sensory observations do not always reveal task-relevant state information. Under such partial observability, optimal behavior typically involves explicitly acting to gain the missing information.
+                Today's standard robot learning techniques struggle to produce such active perception behaviors.
+                We propose a simple real-world robot learning recipe to efficiently train active perception policies. Our approach, <strong>advantage weighted regression (AAWR)</strong>, exploits access to <i>"privileged"</i> extra sensors at training time. The privileged sensors enable training high-quality privileged value functions that aid in estimating the advantage of the target policy. Bootstrapping from a small number of potentially suboptimal demonstrations and an easy-to-obtain coarse policy initialization, AAWR quickly acquires active perception behaviors and boosts task performance. In evaluations on 8 manipulation tasks on 3 robots spanning varying degrees of partial observability, AAWR synthesizes reliable active perception behaviors that outperform all prior approaches. When initialized with a <i>"generalist"</i> robot policy that struggles with active perception tasks, AAWR efficiently generates information-gathering behaviors that allow it to operate under severe partial observability for manipulation tasks. Website:<a href="https://penn-pal-lab.github.io/aawr/">penn-pal-lab.github.io/aawr</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container is-max-widescreen">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p style="font-size:125%;">
-              A robot's instantaneous sensory observations do not always reveal task-relevant state information. Under such partial observability, optimal behavior typically involves explicitly acting to gain the missing information.
-              Today's standard robot learning techniques struggle to produce such active perception behaviors.
-              We propose a simple real-world robot learning recipe to efficiently train active perception policies. Our approach, <strong>advantage weighted regression (AAWR)</strong>, exploits access to <i>“privileged"</i> extra sensors at training time. The privileged sensors enable training high-quality privileged value functions that aid in estimating the advantage of the target policy. Bootstrapping from a small number of potentially suboptimal demonstrations and an easy-to-obtain coarse policy initialization, AAWR quickly acquires active perception behaviors and boosts task performance. In evaluations on 8 manipulation tasks on 3 robots spanning varying degrees of partial observability, AAWR synthesizes reliable active perception behaviors that outperform all prior approaches. When initialized with a <i>“generalist”</i> robot policy that struggles with active perception tasks, AAWR efficiently generates information-gathering behaviors that allow it to operate under severe partial observability for manipulation tasks. Website:<a href="https://penn-pal-lab.github.io/aawr/">penn-pal-lab.github.io/aawr</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
   
@@ -648,7 +642,18 @@
   </footer>
 
   <script>
-    // Placeholder for future scripts
+    function toggleAbstract() {
+      const content = document.getElementById('abstract-content');
+      const toggleText = document.getElementById('abstract-toggle-text');
+      
+      if (content.style.display === 'none') {
+        content.style.display = 'block';
+        toggleText.textContent = 'Click here to collapse full abstract';
+      } else {
+        content.style.display = 'none';
+        toggleText.textContent = 'Click here to expand full abstract';
+      }
+    }
   </script>
 
 </body>
