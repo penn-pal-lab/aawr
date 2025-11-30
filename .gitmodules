@@ -7,3 +7,6 @@
 [submodule "src/reward_pipeline/vision/GroundingDINO"]
 	path = src/reward_pipeline/vision/GroundingDINO
 	url = git@github.com:IDEA-Research/GroundingDINO.git
+[submodule "real_robot/franka_eva"]
+	path = real_robot/franka_eva
+	url = https://github.com/Everloom-129/eva_pi0/
