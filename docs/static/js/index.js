@@ -146,6 +146,192 @@ function initCustomPlaybackRates() {
   });
 }
 
+// Global handler for abstract toggle (used by onclick in HTML)
+function toggleAbstract() {
+  var content = document.getElementById('abstract-content');
+  var toggleText = document.getElementById('abstract-toggle-text');
+  if (!content || !toggleText) return;
+
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    toggleText.textContent = 'Abstract ▲';
+  } else {
+    content.style.display = 'none';
+    toggleText.textContent = 'Abstract ▼';
+  }
+}
+
+// 3D trajectory viewer controls
+function initTrajectoryControls() {
+  var trajRoot = document.getElementById('traj-controls');
+  if (!trajRoot) {
+    return;
+  }
+
+  var state = {
+    mode: 'offline',
+    scene: 'bookshelf',
+    object: 'pineapple',
+    algo: 'aawr'
+  };
+
+  var groupScene = document.getElementById('traj-group-scene');
+  var groupObject = document.getElementById('traj-group-object');
+  var groupAlgo = document.getElementById('traj-group-algo');
+
+  function setSelectedInGroup(group, value) {
+    var buttons = document.querySelectorAll('.traj-option[data-group="' + group + '"]');
+    buttons.forEach(function(btn) {
+      var isSelected = btn.dataset.value === value;
+      btn.classList.toggle('is-selected', isSelected);
+      if (isSelected) {
+        btn.classList.remove('is-light');
+        btn.classList.add('is-link');
+      } else {
+        btn.classList.remove('is-link');
+        btn.classList.add('is-light');
+      }
+    });
+  }
+
+  function setButtonDisabled(btn, disabled) {
+    if (disabled) {
+      btn.classList.add('is-disabled');
+      btn.disabled = true;
+    } else {
+      btn.classList.remove('is-disabled');
+      btn.disabled = false;
+    }
+  }
+
+  function getTrajectoryBase(selection) {
+    if (selection.mode === 'offline') {
+      if (selection.scene === 'bookshelf') {
+        if (selection.object === 'pineapple') return 'offline_bookshelf_p';
+        if (selection.object === 'duck') return 'offline_bookshelf_d';
+      }
+      if (selection.scene === 'shelf_cabinet' && selection.object === 'pineapple') {
+        return 'offline_shelf_cabinet';
+      }
+      if (selection.scene === 'complex' && selection.object === 'pineapple') {
+        return 'offline_complex';
+      }
+      return null;
+    }
+
+    // Online mode: AAWR / AWR / BC use global rollouts;
+    // Exhaustive uses scene-specific exhaustive trajectories.
+    if (selection.algo === 'aawr') return 'online_aawr';
+    if (selection.algo === 'awr') return 'online_awr';
+    if (selection.algo === 'bc') return 'online_bc';
+    if (selection.algo === 'exhaustive') {
+      if (selection.scene === 'bookshelf') return 'exhaustive_bookshelf';
+      if (selection.scene === 'shelf_cabinet') return 'exhaustive_shelf_cabinet';
+      if (selection.scene === 'complex') return 'exhaustive_complex';
+    }
+    return null;
+  }
+
+  function updateAvailability(selection) {
+    var mode = selection.mode;
+
+    // Algo group only matters in online mode
+    if (groupAlgo) {
+      if (mode === 'online') {
+        groupAlgo.classList.remove('is-hidden');
+      } else {
+        groupAlgo.classList.add('is-hidden');
+      }
+    }
+
+    // Scene group is always shown; for online non-exhaustive algos it's visually
+    // allowed but does not change files.
+
+    // Object group: used only in offline mode.
+    if (groupObject) {
+      if (mode === 'offline') {
+        groupObject.classList.remove('is-hidden');
+        var objectButtons = document.querySelectorAll('.traj-option[data-group="object"]');
+        var hasValidObject = false;
+        objectButtons.forEach(function(btn) {
+          var value = btn.dataset.value;
+          var disabled = false;
+          if ((selection.scene === 'shelf_cabinet' || selection.scene === 'complex') && value === 'duck') {
+            disabled = true;
+          }
+          setButtonDisabled(btn, disabled);
+          if (!disabled && value === selection.object) {
+            hasValidObject = true;
+          }
+        });
+
+        if (!hasValidObject) {
+          var objectButtonsArr = Array.prototype.slice.call(
+            document.querySelectorAll('.traj-option[data-group="object"]')
+          );
+          var fallback = objectButtonsArr.find(function(btn) {
+            return !btn.classList.contains('is-disabled');
+          });
+          if (fallback) {
+            selection.object = fallback.dataset.value;
+            setSelectedInGroup('object', selection.object);
+          }
+        }
+      } else {
+        groupObject.classList.add('is-hidden');
+      }
+    }
+  }
+
+  function updateMedia(selection) {
+    var base = getTrajectoryBase(selection);
+    var img = document.getElementById('traj-image');
+    var video = document.getElementById('traj-video');
+    if (!img || !video || !base) {
+      return;
+    }
+
+    var pngPath = 'static/videos/3dtraj/' + base + '.png';
+    var mp4Path = 'static/videos/3dtraj/' + base + '.mp4';
+
+    img.src = pngPath;
+    video.src = mp4Path;
+    video.load();
+    if (video.paused) {
+      video.play().catch(function() { });
+    }
+  }
+
+  function refreshAll() {
+    updateAvailability(state);
+    updateMedia(state);
+  }
+
+  var buttons = document.querySelectorAll('.traj-option');
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (btn.classList.contains('is-disabled')) {
+        return;
+      }
+      var group = btn.dataset.group;
+      var value = btn.dataset.value;
+      if (!group || !value) {
+        return;
+      }
+      state[group] = value;
+      setSelectedInGroup(group, value);
+      refreshAll();
+    });
+  });
+
+  // Initial render
+  setSelectedInGroup('mode', state.mode);
+  setSelectedInGroup('scene', state.scene);
+  setSelectedInGroup('object', state.object);
+  setSelectedInGroup('algo', state.algo);
+  refreshAll();
+}
+
 
 $(document).ready(function() {
     // Check for click events on the navbar burger icon
@@ -203,5 +389,6 @@ $(document).ready(function() {
     bulmaSlider.attach();
     initVggtViewer();
     initCustomPlaybackRates();
+    initTrajectoryControls();
 
 })
