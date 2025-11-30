@@ -267,8 +267,11 @@
               TL;DR: We propose a simple robot learning recipe leveraging privileged information to train active
               perception policies on real robots.
             </p>
-            <p style="font-size:125%; margin-top: 0.5rem;">
-              <span id="abstract-toggle-text" style="cursor: pointer; color: #3273dc; text-decoration: underline;" onclick="toggleAbstract()">Click here to expand full abstract</span>
+            <p style="font-size:200%; margin-top: 0.5rem; text-align: center;">
+              <span id="abstract-toggle-text" style="cursor: pointer; color: #3273dc;" onclick="toggleAbstract()">
+                <span style="display: inline-block; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid #3273dc; margin-right: 8px; vertical-align: middle;"></span>
+                <strong>Abstract ▼ </strong>
+              </span>
             </p>
             <div id="abstract-content" class="content has-text-justified" style="display: none; margin-top: 1rem;">
               <p style="font-size:125%;">
@@ -321,7 +324,7 @@
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
-          <h2 class="title is-3">Sec 1: VLA handoff experiment</h2>
+          <h2 class="title is-3">Sec 1: Pi0 Active Perception Experiments</h2>
           <div class="content has-text-justified">
             <p style="font-size:125%;">
             </p>
@@ -359,9 +362,9 @@
 
             <h3 class="title is-4" style="margin-top: 1.5rem;">Tasks (4 real Franka tasks)</h3>
             <div class="columns is-vcentered" style="margin-bottom: 1.75rem;">
-              <div class="column is-half">
+              <div class="column is-two-thirds">
                 <figure class="image">
-                  <img src="static/images/sec1_task_setup.png" alt="Task Setup">
+                  <img src="static/images/sec1_task_scene.png" alt="Task Setup">
                 </figure>
               </div>
                 <div class="column">
@@ -379,9 +382,6 @@
                 </div>
             </div>
 
-            <figure class="image">
-              <img src="static/images/sec1_task_scene.png" alt="Search Scene">
-            </figure>
 
             <h3 class="title is-4" style="margin-top: 1.5rem;">Observation Space</h3>
             <p>
@@ -390,16 +390,21 @@
             <p>
               <strong>Privileged Sensors::</strong> object detector bounding boxes and segmentation masks
             </p>
-            <div class="columns is-centered" style="margin-top: 1rem;">
-              <div class="column is-three-quarters">
+            <div class="columns" style="margin-top: 1rem;">
+              <div class="column is-half">
                  <div class="video-card">
                    <video src="static/videos/franka/sec1_reward_wrist.mp4" controls muted loop playsinline></video>
                  </div>
               </div>
+              <div class="column is-half">
+                <figure class="image">
+                  <img src="static/images/sec1_reward_curve.png" alt="Reward Curve" style="width: 100%;">
+                  <figcaption style="margin-top: 0.5rem; text-align: center; font-size: 95%; color: #666;">
+                    Example reward trajectory during a search episode. Note the sharp peak at episode termination when the object enters the target region, this shape a high, sparse reward for advantage weighting.
+                  </figcaption>
+                </figure>
+              </div>
             </div>
-            <figure class="image" style="margin-top: 0.8rem;">
-              <img src="static/images/sec1_reward_curve.png" alt="Reward Curve" style="width: 80%;">
-            </figure>
             <p>
 
 
@@ -490,7 +495,7 @@
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
-          <h2 class="title is-3">Sec 2: Koch real world RL experiment</h2>
+          <h2 class="title is-3">Sec 2: Koch Interactive Perception Experiments</h2>
           <div class="content has-text-justified">
             <p style="font-size:125%;">
               <!-- Placeholder for Koch real world RL experiment content -->
@@ -612,13 +617,31 @@
     </div>
   </section>
 
+  
+
+
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          
+          <h2 class="title is-3">Q&A</h2>
+
+          
+          <div class="content has-text-justified">
+            <p style="font-size:125%; text-align: center;">
+              Please read the paper for more details and full roll out videos at our <a href="https://sites.google.com/view/rwrl-ap/home" target="_blank">appendix page</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <!-- <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a> -->
+      
         <a class="icon-link" href="https://github.com/hueds" class="external-link" disabled>
           <i class="fab fa-github"></i>
         </a>
@@ -649,10 +672,10 @@
       
       if (content.style.display === 'none') {
         content.style.display = 'block';
-        toggleText.textContent = 'Click here to collapse full abstract';
+        toggleText.textContent = 'Abstract ▲';
       } else {
         content.style.display = 'none';
-        toggleText.textContent = 'Click here to expand full abstract';
+        toggleText.textContent = 'Abstract ▼';
       }
     }
   </script>
