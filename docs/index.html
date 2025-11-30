@@ -288,8 +288,9 @@
             </p>
             <p style="font-size:200%; margin-top: 0.5rem; text-align: center;">
               <span id="abstract-toggle-text" style="cursor: pointer; color: #3273dc;" onclick="toggleAbstract()">
-                <span style="display: inline-block; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid #3273dc; margin-right: 8px; vertical-align: middle;"></span>
-                <strong>Abstract ▼ </strong>
+                <span id="abstract-triangle" style="display: inline-block; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid #3273dc; margin-right: 8px; vertical-align: middle;"></span>
+                <strong>Abstract</strong>
+                <span id="abstract-hint" style="font-size: 50%; font-weight: normal; margin-left: 0.5rem;">(click to expand)</span>
               </span>
             </p>
             <div id="abstract-content" class="content has-text-justified" style="display: none; margin-top: 1rem;">
@@ -358,9 +359,8 @@
               <div class="column">
                 <div class="content has-text-justified" style="font-size: 110%;">
                   <p>
-                    <strong>Goal:</strong> Search tasks still pose a challenge for VLAs. So we propose to learn an active perception “helper” policy that searches for the target under clutter/occlusion, then handoff to a generalist VLA policy (π0) for grasping.
+                    <strong>Goal:</strong> Search tasks still pose a challenge for VLAs. So we propose to learn an active perception “helper” policy that searches for a target object under clutter/occlusion, then handoff to a generalist VLA policy (π0) for grasping.
                   </p>
-                  <p><strong>Target Object: </strong> For the sake of reusability, we use a toy pineapple and toy duck as the target object.</p>
                 </div>
               </div>
             </div>
@@ -390,7 +390,7 @@
               <div class="column">
                 <div class="content has-text-justified" style="font-size: 110%;">
                   <p>
-                    <strong>Bookshelf-P/D:</strong> placed on bookshelf of three shelves.
+                    <strong>Bookshelf-Pineapple/Duck:</strong> Find the target pineapple or duck, placed on bookshelf of three shelves.
                   </p>
                   <p>
                     <strong>Shelf-Cabinet:</strong> adds cabinet/drawer hiding spots.
@@ -406,10 +406,10 @@
             
             <h3 class="title is-4" style="margin-top: 1.5rem;">Observation Space</h3>
             <p>
-              <strong>Deployment Sensors:</strong> Wrist Camera RGB + Proprioception + Occupancy Grid as history.
+              <strong>Deployment Sensors:</strong> Wrist Camera RGB + Proprioception + Occupancy Grid.
             </p>
             <p>
-              <strong>Privileged Sensors::</strong> Object detector bounding boxes and segmentation masks
+              <strong>Privileged Sensors:</strong> Object detector bounding boxes and segmentation masks
             </p>
             <div class="columns" style="margin-top: 1rem;">
               <div class="column is-half">
@@ -429,8 +429,46 @@
             <p>
 
 
-            <h3 class="title is-4" style="margin-top: 1.5rem;">Learned Behavior 1: Fixation</h3>
-            <p>For Active Perception in manipulation, one important behavior is to fixate on the target and keep getting closer before handover. 
+            <h3 class="title is-4" style="margin-top: 1.5rem;">AAWR learns long horizon search behaviors.</h3>
+            <div class="columns" style="margin-top: 1rem;">
+              <div class="column is-half">
+                <div class="video-card">
+                  <video src="static/videos/franka/complex_AAWR_longhorizon_left.mp4" autoplay muted loop playsinline></video>
+                  <div class="label">AAWR (3x)</div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="content has-text-justified" style="font-size: 110%;">
+                  <p>
+                    AAWR scans the scenes more efficiently than the baselines. We notice that baselines tend to drift into out-of-distribution joint configurations or do inefficient motions (e.g. looking up toward the ceiling or straight at the ground), decreasing their long-horizon performance.
+                  </p>
+                  <p>
+                    Here we show the left camera (not used by the robot) to show how AAWR smoothly scans scene without drifting or colliding with the environment. 
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="video-grid" style="margin-top: 1rem;">
+              <div class="video-card">
+                <video src="static/videos/franka/complex_AWR_longhorizon_left.mp4" autoplay muted loop playsinline></video>
+                <div class="label">AWR: Drifts away but π0 is luckily able to grasp the target.</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/complex_BC_longhorizon_left.mp4" autoplay muted loop playsinline></video>
+                <div class="label">BC: Collides with the cabinet door</div>
+              </div>
+              <div class="video-card">
+                <video src="static/videos/franka/Openloop_hard2_web.mp4" autoplay muted loop playsinline></video>
+                <div class="label">π0: Immediately collides with the environment and cannot recover.</div>
+              </div>
+            </div>
+            <!-- <p class="video-grid-note">
+              Please watch
+              <a href="#vggt-section">VGGT Reconstruction Section</a>.
+            </p> -->
+
+            <h3 class="title is-4" style="margin-top: 2rem;">AAWR learns to fixate.</h3>
+            <p>An important characteristic for active perception policies is fixation, where the camera moves while keeping the target clearly in view. This is important for maximizing the success rate of the generalist policy which benefits from a clear viewpoint of the object.  
               </p>
             <p>
               As shown below, the privileged information from object segmentation helps the policy to recongnize the target pineapple toy without drifting away. 
@@ -438,11 +476,11 @@
             </p>
             <div class="video-grid">
               <div class="video-card">
-                <video src="static/videos/franka/franka_complex_fixation_hand_camera.mp4" autoplay muted loop playsinline data-playback-rate="0.066"></video>
+                <video src="static/videos/franka/franka_complex_fixation_hand_camera.mp4" autoplay muted loop playsinline data-playback-rate="0.25"></video>
                 <div class="label">Fixate when discover the target in the side and reorient towards it</div>
               </div>
               <div class="video-card">
-                <video src="static/videos/franka/franka_complex_fixation_drawer_hand_camera.mp4" autoplay muted loop playsinline data-playback-rate="0.066"></video>
+                <video src="static/videos/franka/franka_complex_fixation_drawer_hand_camera.mp4" autoplay muted loop playsinline data-playback-rate="0.25"></video>
                 <div class="label">Fixate when discover the target object in the drawer</div>
               </div>
               <div class="video-card">
@@ -452,46 +490,6 @@
             </div>
             <p class="video-grid-note">
               Please watch the difference between AAWR and baselines in the
-              <a href="#vggt-section">VGGT Reconstruction Section</a>.
-            </p>
-
-            <h3 class="title is-4" style="margin-top: 2rem;">Learned Behavior 2: Search the entire scene more efficiently and longer horizon</h3>
-            <div class="columns" style="margin-top: 1rem;">
-              <div class="column is-half">
-                <div class="video-card">
-                  <video src="static/videos/franka/complex_AAWR_longhorizon_left.mp4" autoplay muted loop playsinline></video>
-                  <div class="label">AAWR</div>
-                </div>
-              </div>
-              <div class="column">
-                <div class="content has-text-justified" style="font-size: 110%;">
-                  <p>
-                   Becaue we use cartesian velocity control to move the end effector, the search policy is prune to drift away if it falls in out-of-distribution regions (e.g. look up toward the ceiling or look back out of the tabletop). And it turns out AAWR can scan the scene more efficiently and stay at good joint configuration for longer horizon than the baselines. 
-                  </p>
-                  <p>
-                    Here we show the left cameara to show how AAWR smoothly scans scene without drifting away or colliside with the environment. 
-                    <br>
-                    Notice the VLAs do not have left camera as input and the target is occluded in its observation.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="video-grid" style="margin-top: 1rem;">
-              <div class="video-card">
-                <video src="static/videos/franka/complex_AWR_longhorizon_left.mp4" autoplay muted loop playsinline></video>
-                <div class="label">AWR: Drift away but π0 still succeed to grasp the target by coincidence.</div>
-              </div>
-              <div class="video-card">
-                <video src="static/videos/franka/complex_BC_longhorizon_left.mp4" autoplay muted loop playsinline></video>
-                <div class="label">BC: Collide with the cabinet door</div>
-              </div>
-              <div class="video-card">
-                <video src="static/videos/franka/Openloop_hard2_web.mp4" autoplay muted loop playsinline></video>
-                <div class="label">π0: Immediate colliside with the environment and do not know how to recover.</div>
-              </div>
-            </div>
-            <p class="video-grid-note">
-              Please watch
               <a href="#vggt-section">VGGT Reconstruction Section</a>.
             </p>
 

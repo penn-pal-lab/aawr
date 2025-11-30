@@ -149,15 +149,24 @@ function initCustomPlaybackRates() {
 // Global handler for abstract toggle (used by onclick in HTML)
 function toggleAbstract() {
   var content = document.getElementById('abstract-content');
-  var toggleText = document.getElementById('abstract-toggle-text');
-  if (!content || !toggleText) return;
+  var triangle = document.getElementById('abstract-triangle');
+  var hint = document.getElementById('abstract-hint');
+  if (!content || !triangle) return;
 
   if (content.style.display === 'none') {
     content.style.display = 'block';
-    toggleText.textContent = 'Abstract ▲';
+    // Rotate triangle to point up (▲)
+    triangle.style.borderTop = 'none';
+    triangle.style.borderBottom = '8px solid #3273dc';
+    // Update hint text
+    if (hint) hint.textContent = '(click to collapse)';
   } else {
     content.style.display = 'none';
-    toggleText.textContent = 'Abstract ▼';
+    // Rotate triangle to point down (▼)
+    triangle.style.borderTop = '8px solid #3273dc';
+    triangle.style.borderBottom = 'none';
+    // Update hint text
+    if (hint) hint.textContent = '(click to expand)';
   }
 }
 
