@@ -1,0 +1,12 @@
+[submodule "src/reward_pipeline/vision/grounding-dino"]
+	path = src/reward_pipeline/vision/grounding-dino
+	url = git@github.com:IDEA-Research/GroundingDINO.git
+[submodule "src/reward_pipeline/vision/segment-anything"]
+	path = src/reward_pipeline/vision/segment-anything
+	url = git@github.com:facebookresearch/segment-anything.git
+[submodule "src/reward_pipeline/vision/GroundingDINO"]
+	path = src/reward_pipeline/vision/GroundingDINO
+	url = git@github.com:IDEA-Research/GroundingDINO.git
+[submodule "real_robot/franka_eva"]
+	path = real_robot/franka_eva
+	url = https://github.com/Everloom-129/eva_pi0/
