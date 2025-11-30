@@ -10,3 +10,9 @@
 [submodule "real_robot/franka_eva"]
 	path = real_robot/franka_eva
 	url = https://github.com/Everloom-129/eva_pi0/
+[submodule "real_robot/gym-lowcostrobot"]
+	path = real_robot/gym-lowcostrobot
+	url = git@github.com:Everloom-129/gym-lowcostrobot.git
+[submodule "real_robot/koch_lerobot"]
+	path = real_robot/koch_lerobot
+	url = git@github.com:Everloom-129/gym-lowcostrobot.git
