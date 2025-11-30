@@ -370,7 +370,7 @@
                 <div class="column">
                   <div class="content has-text-justified" style="font-size: 110%;">
                     <p>
-                      <strong>Bookshelf-P / Bookshelf-D:</strong> target object (toy pineapple / toy duck) placed on one of three shelves; policy must scan shelves vertically & horizontally and stop at good viewpoints.
+                      <strong>Bookshelf-P / Bookshelf-D:</strong> target object (toy pineapple / toy duck) placed on one of three shelves; 
                     </p>
                     <p>
                       <strong>Shelf-Cabinet:</strong> adds cabinet/drawer hiding spots, increases search complexity.
@@ -483,6 +483,56 @@
               <div class="video-card">
                 <video src="static/videos/franka/duck_aawr_s1.mp4" autoplay muted loop playsinline></video>
                 <div class="label">Duck Search</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered has-text-left">
+        <div class="column is-full">
+          <h2 class="title is-3">Reconstruct Wrist Camera Perception Range using VGGT</h2>
+          <div class="content has-text-left">
+            <p style="font-size: 115%;">
+              To show AAWR can explore the scene more efficient than baselines, we illustrate the perception range of the wrist camera using Visual Geometry Grounded Transformer(VGGT). The AAWR can explore the scene more efficiently, and run longer horizon before drifting away from the target scene. 
+            </p>
+          </div>
+
+          <div id="vggt-viewer" class="box" style="border: none; box-shadow: none; padding: 1.5rem; margin-top: 1.5rem;">
+            <div class="columns is-vcentered">
+              <div class="column is-one-third has-text-left">
+                <div class="field">
+                  <label class="label is-size-7" style="text-transform: uppercase; letter-spacing: 0.08em;">Behavior mode</label>
+                  <div class="buttons are-small has-addons is-flex is-flex-wrap-wrap">
+                    <button class="button is-info" data-vggt-behavior="longhorizon">Long horizon</button>
+                    <button class="button is-light" data-vggt-behavior="fixation">Fixation</button>
+                  </div>
+                </div>
+
+                <div class="field" style="margin-top: 1rem;">
+                  <label class="label is-size-7" style="text-transform: uppercase; letter-spacing: 0.08em;">Algorithm</label>
+                  <div class="buttons are-small has-addons is-flex is-flex-wrap-wrap">
+                    <button class="button is-info" data-vggt-algo="aawr">AAWR</button>
+                    <button class="button is-light" data-vggt-algo="awr">AWR</button>
+                    <button class="button is-light" data-vggt-algo="bc">BC</button>
+                    <button class="button is-light" data-vggt-algo="pi0">π0</button>
+                    <button class="button is-light" data-vggt-algo="teleoperation">Teleoperation</button>
+                  </div>
+                </div>
+
+                <p id="vggt-status" class="help is-size-7" style="margin-top: 0.75rem;">
+                  Long horizon • AAWR
+                </p>
+              </div>
+
+              <div class="column">
+                <div class="video-card full">
+                  <video id="vggt-video" src="" autoplay muted loop playsinline style="background: #000;"></video>
+                </div>
               </div>
             </div>
           </div>

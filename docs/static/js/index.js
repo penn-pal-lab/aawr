@@ -19,6 +19,112 @@ function setInterpolationImage(i) {
   $('#interpolation-image-wrapper').empty().append(image);
 }
 
+// VGGT wrist camera scan viewer configuration
+var VGGT_VIDEOS = {
+  longhorizon: {
+    aawr: 'static/videos/vggt/pair1-longhorizon_AAWR_success_multiview.mp4',
+    awr: 'static/videos/vggt/pair1-longhorizon_AWR_failure_multiview.mp4',
+    bc: 'static/videos/vggt/pair1-longhorizon_BC_failure_multiview.mp4',
+    pi0: 'static/videos/vggt/pair1-longhorizon_pi0_failure_multiview.mp4',
+    teleoperation: 'static/videos/vggt/pair1-longhorizon_teleoperation_success_multiview.mp4'
+  },
+  fixation: {
+    aawr: 'static/videos/vggt/pair2-fixation_AAWR_success_multiview.mp4',
+    awr: 'static/videos/vggt/pair2-fixation_AWR_failure_multiview.mp4',
+    bc: 'static/videos/vggt/pair2-fixation_BC_failure_multiview.mp4',
+    pi0: 'static/videos/vggt/pair2-fixation_pi0_failure_multiview.mp4'
+    // no teleoperation fixation video
+  }
+};
+
+function initVggtViewer() {
+  var videoEl = document.getElementById('vggt-video');
+  if (!videoEl) return;
+
+  var behaviorButtons = document.querySelectorAll('[data-vggt-behavior]');
+  var algoButtons = document.querySelectorAll('[data-vggt-algo]');
+  var statusEl = document.getElementById('vggt-status');
+
+  var currentBehavior = 'longhorizon';
+  var currentAlgo = 'aawr';
+
+  function hasVideo(behavior, algo) {
+    return VGGT_VIDEOS[behavior] && VGGT_VIDEOS[behavior][algo];
+  }
+
+  function updateAlgoButtons() {
+    algoButtons.forEach(function(btn) {
+      var algo = btn.getAttribute('data-vggt-algo');
+      var available = hasVideo(currentBehavior, algo);
+      btn.disabled = !available;
+      btn.classList.toggle('is-static', !available);
+      btn.classList.toggle('is-light', !available || algo !== currentAlgo);
+      btn.classList.toggle('is-info', available && algo === currentAlgo);
+    });
+  }
+
+  function setVideoSource() {
+    if (!hasVideo(currentBehavior, currentAlgo)) return;
+    var src = VGGT_VIDEOS[currentBehavior][currentAlgo];
+    if (src && videoEl.getAttribute('src') !== src) {
+      videoEl.setAttribute('src', src);
+      videoEl.load();
+      var playPromise = videoEl.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.catch(function() {
+          // Autoplay might be blocked; ignore.
+        });
+      }
+    }
+    if (statusEl) {
+      var behaviorBtn = document.querySelector('[data-vggt-behavior="' + currentBehavior + '"]');
+      var algoBtn = document.querySelector('[data-vggt-algo="' + currentAlgo + '"]');
+      var behaviorLabel = behaviorBtn ? behaviorBtn.textContent.trim() : currentBehavior;
+      var algoLabel = algoBtn ? algoBtn.textContent.trim() : currentAlgo;
+      statusEl.textContent = behaviorLabel + ' • ' + algoLabel;
+    }
+  }
+
+  behaviorButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var behavior = this.getAttribute('data-vggt-behavior');
+      if (!VGGT_VIDEOS[behavior]) return;
+      currentBehavior = behavior;
+      behaviorButtons.forEach(function(b) {
+        var isActive = b.getAttribute('data-vggt-behavior') === currentBehavior;
+        b.classList.toggle('is-info', isActive);
+        b.classList.toggle('is-light', !isActive);
+      });
+
+      if (!hasVideo(currentBehavior, currentAlgo)) {
+        // Fallback to the first available algorithm for this behavior
+        var algos = Object.keys(VGGT_VIDEOS[currentBehavior]);
+        for (var i = 0; i < algos.length; i++) {
+          if (hasVideo(currentBehavior, algos[i])) {
+            currentAlgo = algos[i];
+            break;
+          }
+        }
+      }
+      updateAlgoButtons();
+      setVideoSource();
+    });
+  });
+
+  algoButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (this.disabled) return;
+      currentAlgo = this.getAttribute('data-vggt-algo');
+      updateAlgoButtons();
+      setVideoSource();
+    });
+  });
+
+  // Initialize state
+  updateAlgoButtons();
+  setVideoSource();
+}
+
 
 $(document).ready(function() {
     // Check for click events on the navbar burger icon
@@ -74,5 +180,6 @@ $(document).ready(function() {
     // $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
 
     bulmaSlider.attach();
+    initVggtViewer();
 
 })
