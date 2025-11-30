@@ -336,7 +336,7 @@
               <div class="column">
                 <div class="content has-text-justified" style="font-size: 110%;">
                   <p>
-                    <strong>Goal:</strong> Learn an active perception “helper” policy that searches for the target under clutter/occlusion, then handoff to a generalist VLA policy (π0) for grasping. π0 itself struggles because it lacks memory and performs poorly on search-like POMDP
+                    <strong>Goal:</strong> Search tasks still pose a challenge for VLAs. So we propose to learn an active perception “helper” policy that searches for the target under clutter/occlusion, then handoff to a generalist VLA policy (π0) for grasping.
                   </p>
                 </div>
               </div>
@@ -345,16 +345,17 @@
 
           
 
-            <h3 class="title is-4" style="margin-top: 1.5rem;">Switching framework</h3>
+            <!-- <h3 class="title is-4" style="margin-top: 1.5rem;">Switching framework</h3>
             <p>
+              Remove for now until figure can be improved.
               Run active perception policy first.
             </p>
             <p>
-              Periodically run an object detector on wrist RGB; once target is detected across two consecutive checks, switch to π0 for grasp.
+              Periodically run an object detector on wrist images; once target is detected, switch to π0 for grasping.
             </p>
             <figure class="image">
               <img src="static/images/sec1_sysdiagram.png" alt="Switching Framework">
-            </figure>
+            </figure> -->
 
             <h3 class="title is-4" style="margin-top: 1.5rem;">Tasks (4 real Franka tasks)</h3>
             <div class="columns is-vcentered" style="margin-bottom: 1.75rem;">
@@ -382,12 +383,12 @@
               <img src="static/images/sec1_task_scene.png" alt="Search Scene">
             </figure>
 
-            <h3 class="title is-4" style="margin-top: 1.5rem;">Sensors / privileged info</h3>
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Observation Space</h3>
             <p>
-              <strong>Deployment:</strong> wrist RGB + proprio (partial obs).
+              <strong>Deployment Sensors:</strong> Wrist RGB + proprio (partial obs).
             </p>
             <p>
-              <strong>Training (privileged for critics):</strong> detection bbox / segmentation masks.
+              <strong>Privileged Sensors::</strong> object detector bounding boxes and segmentation masks
             </p>
             <div class="columns is-centered" style="margin-top: 1rem;">
               <div class="column is-three-quarters">
@@ -402,7 +403,7 @@
             <p>
 
 
-            <h3 class="title is-4" style="margin-top: 1.5rem;">Learned Bavior 1: Fixation</h3>
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Learned Behavior 1: Fixation</h3>
             <div class="video-grid">
               <div class="video-card">
                 <video src="static/videos/franka/franka_complex_1_web.mp4" autoplay muted loop playsinline></video>
