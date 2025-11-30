@@ -320,11 +320,11 @@
       </div>
     </div>
   </section>
-  <section class="section">
+  <section class="section" id="sec1">
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
-          <h2 class="title is-3">Sec 1: Pi0 Active Perception Experiments</h2>
+          <h2 class="title is-3">Experiment 1: VLA Active Perception </h2>
           <div class="content has-text-justified">
             <p style="font-size:125%;">
             </p>
@@ -341,6 +341,7 @@
                   <p>
                     <strong>Goal:</strong> Search tasks still pose a challenge for VLAs. So we propose to learn an active perception “helper” policy that searches for the target under clutter/occlusion, then handoff to a generalist VLA policy (π0) for grasping.
                   </p>
+                  <p><strong>Target Object: </strong> For the sake of reusability, we use a toy pineapple and toy duck as the target object.</p>
                 </div>
               </div>
             </div>
@@ -360,35 +361,35 @@
               <img src="static/images/sec1_sysdiagram.png" alt="Switching Framework">
             </figure> -->
 
-            <h3 class="title is-4" style="margin-top: 1.5rem;">Tasks (4 real Franka tasks)</h3>
+            <h3 class="title is-4" style="margin-top: 1.5rem;">Active Perception Scenes</h3>
             <div class="columns is-vcentered" style="margin-bottom: 1.75rem;">
               <div class="column is-two-thirds">
                 <figure class="image">
                   <img src="static/images/sec1_task_scene.png" alt="Task Setup">
                 </figure>
               </div>
-                <div class="column">
-                  <div class="content has-text-justified" style="font-size: 110%;">
-                    <p>
-                      <strong>Bookshelf-P / Bookshelf-D:</strong> target object (toy pineapple / toy duck) placed on one of three shelves; 
-                    </p>
-                    <p>
-                      <strong>Shelf-Cabinet:</strong> adds cabinet/drawer hiding spots, increases search complexity.
-                    </p>
-                    <p>
-                      <strong>Complex:</strong> adds an extra bottom shelf that's heavily occluded from side views.
-                    </p>
-                  </div>
+              <div class="column">
+                <div class="content has-text-justified" style="font-size: 110%;">
+                  <p>
+                    <strong>Bookshelf-P/D:</strong> placed on bookshelf of three shelves.
+                  </p>
+                  <p>
+                    <strong>Shelf-Cabinet:</strong> adds cabinet/drawer hiding spots.
+                  </p>
+                  <p>
+                    <strong>Complex:</strong> adds an extra bottom shelf that's heavily occluded from side views.
+                  </p>
                 </div>
+              </div>
             </div>
 
 
             <h3 class="title is-4" style="margin-top: 1.5rem;">Observation Space</h3>
             <p>
-              <strong>Deployment Sensors:</strong> Wrist RGB + proprio (partial obs).
+              <strong>Deployment Sensors:</strong> Wrist Camera RGB + Proprioception + Occupancy Grid as history.
             </p>
             <p>
-              <strong>Privileged Sensors::</strong> object detector bounding boxes and segmentation masks
+              <strong>Privileged Sensors::</strong> Object detector bounding boxes and segmentation masks
             </p>
             <div class="columns" style="margin-top: 1rem;">
               <div class="column is-half">
@@ -409,64 +410,74 @@
 
 
             <h3 class="title is-4" style="margin-top: 1.5rem;">Learned Behavior 1: Fixation</h3>
+            <p>For Active Perception in manipulation, one important behavior is to fixate on the target and keep getting closer before handover. 
+              </p>
+            <p>
+              As shown below, the privileged information from object segmentation helps the policy to recongnize the target pineapple toy without drifting away. 
+
+            </p>
             <div class="video-grid">
               <div class="video-card">
-                <video src="static/videos/franka/franka_complex_1_web.mp4" autoplay muted loop playsinline></video>
-                <div class="label">Dummy label 1</div>
+                <video src="static/videos/franka/franka_complex_fixation_hand_camera.mp4" autoplay muted loop playsinline data-playback-rate="0.066"></video>
+                <div class="label">Fixate when discover the target in the side and reorient towards it</div>
               </div>
               <div class="video-card">
-                <video src="static/videos/franka/franka_complex_2_web.mp4" autoplay muted loop playsinline></video>
-                <div class="label">Dummy label 2</div>
+                <video src="static/videos/franka/franka_complex_fixation_drawer_hand_camera.mp4" autoplay muted loop playsinline data-playback-rate="0.066"></video>
+                <div class="label">Fixate when discover the target object in the drawer</div>
               </div>
               <div class="video-card">
                 <video src="static/videos/franka/franka_complex_3_web.mp4" autoplay muted loop playsinline></video>
-                <div class="label">Dummy label 3</div>
+                <div class="label">Disable handover, AAWR will fixate on the target and keep getting closer</div>
               </div>
             </div>
-            <p class="video-grid-note">Here is some example of the learned behaviors</p>
+            <p class="video-grid-note">
+              Please watch the difference between AAWR and baselines in the
+              <a href="#vggt-section">VGGT Reconstruction Section</a>.
+            </p>
 
-            <h3 class="title is-4" style="margin-top: 2rem;">Learned Behavior 2: Search the entire scene more efficient than all baselines</h3>
+            <h3 class="title is-4" style="margin-top: 2rem;">Learned Behavior 2: Search the entire scene more efficiently and longer horizon</h3>
             <div class="columns" style="margin-top: 1rem;">
               <div class="column is-half">
                 <div class="video-card">
-                  <video src="static/videos/franka/franka_complex_4_web.mp4" autoplay muted loop playsinline></video>
+                  <video src="static/videos/franka/complex_AAWR_longhorizon_left.mp4" autoplay muted loop playsinline></video>
                   <div class="label">AAWR</div>
                 </div>
               </div>
               <div class="column">
                 <div class="content has-text-justified" style="font-size: 110%;">
                   <p>
-                    Dummy copy for the main roll-out description. Note the starting pose, target object, and the broad
-                    steps the policy takes before the handoff happens.
+                   Becaue we use cartesian velocity control to move the end effector, the search policy is prune to drift away if it falls in out-of-distribution regions (e.g. look up toward the ceiling or look back out of the tabletop). And it turns out AAWR can scan the scene more efficiently and stay at good joint configuration for longer horizon than the baselines. 
                   </p>
                   <p>
-                    Add any quick takeaways here, e.g., “policy re-centers twice to reduce occlusion and nails the final
-                    grasp.”
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    Here we show the left cameara to show how AAWR smoothly scans scene without drifting away or colliside with the environment. 
+                    <br>
+                    Notice the VLAs do not have left camera as input and the target is occluded in its observation.
                   </p>
                 </div>
               </div>
             </div>
             <div class="video-grid" style="margin-top: 1rem;">
               <div class="video-card">
-                <video src="static/videos/franka/AWR_hard_web.mp4" autoplay muted loop playsinline></video>
-                <div class="label">AWR</div>
+                <video src="static/videos/franka/complex_AWR_longhorizon_left.mp4" autoplay muted loop playsinline></video>
+                <div class="label">AWR: Drift away but π0 still succeed to grasp the target by coincidence.</div>
               </div>
               <div class="video-card">
-                <video src="static/videos/franka/BC_hard_web.mp4" autoplay muted loop playsinline></video>
-                <div class="label">BC</div>
+                <video src="static/videos/franka/complex_BC_longhorizon_left.mp4" autoplay muted loop playsinline></video>
+                <div class="label">BC: Collide with the cabinet door</div>
               </div>
               <div class="video-card">
                 <video src="static/videos/franka/Openloop_hard2_web.mp4" autoplay muted loop playsinline></video>
-                <div class="label">Openloop(?)</div>
+                <div class="label">π0: Immediate colliside with the environment and do not know how to recover.</div>
               </div>
             </div>
+            <p class="video-grid-note">
+              Please watch
+              <a href="#vggt-section">VGGT Reconstruction Section</a>.
+            </p>
 
-            <h3 class="title is-4" style="margin-top: 2rem;">Subsection 3</h3>
+            <h3 class="title is-4" style="margin-top: 2rem;">Handover to Generalist Policy</h3>
+            Here we show the handover to generalist policy after the active perception policy has found the target.
+            
             <div class="video-grid" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
               <div class="video-card">
                 <video src="static/videos/franka/hard_aawr_s1.mp4" autoplay muted loop playsinline></video>
@@ -491,7 +502,7 @@
     </div>
   </section>
 
-  <section class="section">
+    <section class="section" id="vggt-section">
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-left">
         <div class="column is-full">

@@ -125,6 +125,27 @@ function initVggtViewer() {
   setVideoSource();
 }
 
+// Apply per-video playback rates based on a data attribute in HTML:
+// <video ... data-playback-rate="0.066"></video>
+function initCustomPlaybackRates() {
+  var videos = document.querySelectorAll('video[data-playback-rate]');
+
+  videos.forEach(function(video) {
+    var rate = parseFloat(video.getAttribute('data-playback-rate'));
+    if (!rate || rate <= 0) return;
+
+    function applyRate() {
+      video.playbackRate = rate;
+    }
+
+    if (video.readyState >= 1) {
+      applyRate();
+    } else {
+      video.addEventListener('loadedmetadata', applyRate);
+    }
+  });
+}
+
 
 $(document).ready(function() {
     // Check for click events on the navbar burger icon
@@ -181,5 +202,6 @@ $(document).ready(function() {
 
     bulmaSlider.attach();
     initVggtViewer();
+    initCustomPlaybackRates();
 
 })
