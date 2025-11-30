@@ -429,7 +429,7 @@
             <p>
 
 
-            <h3 class="title is-4" style="margin-top: 1.5rem;">AAWR learns long horizon search behaviors.</h3>
+            <h3 class="title is-4" style="margin-top: 1.5rem;">AAWR learns long horizon search behaviors</h3>
             <div class="columns" style="margin-top: 1rem;">
               <div class="column is-half">
                 <div class="video-card">
@@ -467,7 +467,7 @@
               <a href="#vggt-section">VGGT Reconstruction Section</a>.
             </p> -->
 
-            <h3 class="title is-4" style="margin-top: 2rem;">AAWR learns to fixate.</h3>
+            <h3 class="title is-4" style="margin-top: 2rem;">AAWR learns to fixate</h3>
             <p>An important characteristic for active perception policies is fixation, where the camera moves while keeping the target clearly in view. This is important for maximizing the success rate of the generalist policy which benefits from a clear viewpoint of the object.  
               </p>
             <p>
@@ -524,10 +524,14 @@
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-left">
         <div class="column is-full">
-          <h2 class="title is-3">Reconstruct Wrist Camera Perception Range using VGGT</h2>
+          <h2 class="title is-3">3D Scene Reconstructions from Wrist Videos</h2>
           <div class="content has-text-left">
             <p style="font-size: 115%;">
-              To show AAWR can explore the scene more efficient than baselines, we illustrate the perception range of the wrist camera using Visual Geometry Grounded Transformer(VGGT). The AAWR can explore the scene more efficiently, and run longer horizon before drifting away from the target scene. 
+              To visualize the exploration capabilities of different wrist camera policies, we use Visual Geometry Grounded Transformer (VGGT) to reconstruct the 3D scene from their trajectories.
+
+              The visualizations show that AAWR covers the scene more quickly and extensively then baselines, and fixates on the target objects.
+              
+             
             </p>
           </div>
 
@@ -577,10 +581,10 @@
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-left">
       <div class="column is-full">
-        <h2 class="title is-3">3D Trajectory Visualizations</h2>
+        <h2 class="title is-3">Offline / Online Data Analysis</h2>
         <div class="content has-text-justified">
           <p style="font-size:110%;">
-            Explore 3D visualizations of the robot gripper trajectories. Use the controls to switch between
+            We visualize the offline demonstration data and online robot rollouts. Use the controls to switch between
             offline/online rollouts, scenes, and objects. When a particular combination is unavailable, the option
             is greyed out.
           </p>
@@ -681,21 +685,23 @@
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
-          <h2 class="title is-3">Sec 2: Koch Interactive Perception Experiments</h2>
+          <h2 class="title is-3">Experiment 2: Learning Blind Pick through Online RL</h2>
           <div class="content has-text-justified">
             <p style="font-size:125%;">
-              <!-- Placeholder for Koch real world RL experiment content -->
+              Here, we explore the real-world online RL capabilities of AAWR. The task is to pick up objects given just the initial object position estimate. Normally, manipulation policies are given the object pose every timestep, but here we only have a single estimate at the beginning of the episode.
             </p>
 
-            <h3 class="title is-4" style="margin-top: 1.5rem;">Subsection 1</h3>
-            <div class="video-row">
-              <div class="video-card full">
-                <video src="static/videos/koch/AAWR_koch_long_web.mp4" autoplay muted loop playsinline></video>
-                <div class="label">Koch rollout overview</div>
+            <!-- <h3 class="title is-4" style="margin-top: 1.5rem;">Subsection 1</h3> -->
+            <div class="columns is-centered" style="margin-top: 1rem;">
+              <div class="column is-two-thirds">
+                <div class="video-card">
+                  <video src="static/videos/koch/AAWR_koch_long_web.mp4" autoplay muted loop playsinline></video>
+                  <div class="label">At the start of the episode, the policy is given the intial object pose. As a result, the policy must learn to be precise in its initial grasp and avoid perturbing the object. </div>
+                </div>
               </div>
             </div>
 
-            <h3 class="title is-4" style="margin-top: 2rem;">Subsection 2</h3>
+            <h3 class="title is-4" style="margin-top: 2rem;">Training Details</h3>
             <div class="columns" style="margin-top: 1rem;">
               <div class="column is-half">
                 <figure class="image">
@@ -705,16 +711,60 @@
               <div class="column">
                 <div class="content has-text-justified" style="font-size: 110%;">
                   <p>
-                    Task: Real-world “Blind Pick” on Koch robot: pick objects under severe partial observability (policy input is limited; critics have privileged estimates). Task and training recipe follow the same AAWR idea and can be trained offline-to-online.
+                    Task: Real-world “Blind Pick” on Koch robot: pick objects using just initial object position. 
                   </p>
                   <p>
-                    <strong>Sensors / data regime:</strong> Partial obs: joints + initial object position (policy input); Privileged obs (training): object position estimate; Reward: dense; Demos: 100 suboptimal; Offline steps 20K; Online steps 1.2K
+                    <strong>Sensors / data regime:</strong> Partial obs: joints + initial object position (policy input); Privileged obs (training): object position estimate at every timestep; Reward: dense; Demos: 100 suboptimal demos; Offline steps 20K; Online steps 1.2K
                   </p>
                 </div>
               </div>
             </div>
 
-            <h3 class="title is-4" style="margin-top: 2rem;">Comparison</h3>
+           <h3 class="title is-4" style="margin-top: 2rem;">Results</h3>
+           <div class="columns is-vcentered" style="margin-top: 0.5rem;">
+             <div class="column is-half">
+               <p>
+                 AAWR achieves substantially higher pick success rates than both BC and AWR, in <strong>both</strong> the offline and online training regimes on the Koch blind pick task. With just online 1200 transitions (~50 episodes), Online AAWR is able to improve by almost ~20% over offline AAWR.
+                 <br>
+                 <br>
+                 We find the online RL is able to reduce jerkiness and increase the accuracy of grasping over the offline policy.
+               </p>
+             </div>
+             <div class="column is-half">
+               <div class="table-container" style="max-width: 460px; margin-left: auto; margin-right: auto;">
+                 <table class="table is-striped is-fullwidth is-narrow has-text-centered">
+                   <thead>
+                     <tr>
+                       <th>Method</th>
+                       <th>Pick&nbsp;%</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     <tr>
+                       <td>BC</td>
+                       <td>41</td>
+                     </tr>
+                     <tr>
+                       <td>Off. AWR</td>
+                       <td>62</td>
+                     </tr>
+                     <tr>
+                       <td>On. AWR</td>
+                       <td>55</td>
+                     </tr>
+                     <tr>
+                       <td>Off. AAWR (ours)</td>
+                       <td>71</td>
+                     </tr>
+                     <tr>
+                       <td><strong>On. AAWR (ours)</strong></td>
+                       <td><strong>89</strong></td>
+                     </tr>
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+           </div>
             <div class="video-grid" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
               <div class="video-card">
                 <video src="static/videos/koch/AAWR_koch_web.mp4" autoplay muted loop playsinline></video>
@@ -739,10 +789,10 @@
     <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
-          <h2 class="title is-3">Sec 3: Simulation Experiment</h2>
+          <h2 class="title is-3">Simulation Experiments</h2>
           <div class="content has-text-justified">
             <p style="font-size:125%;">
-              We developed AAWR on simulation first, and we selected 3 different tasks with varied sensor setups and degrees of partial observability to test the best practice of privileged reward design.
+              We selected 3 different tasks with varied sensor setups and degrees of partial observability to benchmark AAWR.
             </p>
             
             <div class="columns is-centered" style="margin-top: 2rem;">
@@ -770,7 +820,7 @@
                    <div class="card-content has-text-centered" style="padding: 0.5rem;">
                     <h4 class="title is-5">Fully Obs Pick (Sim)</h4>
                     <p style="margin-bottom: 1rem; font-size: 95%;">
-                      Even when fully observable, AAWR can still help because privileged critics don't need to learn object localization from pixels.
+                      Even in fully observable scenarios, AAWR can still help because privileged critics don't need to learn object localization from pixels.
                     </p>
                     <div class="video-card">
                       <video src="static/videos/sim/fully_obs_pick.mp4" controls muted loop playsinline></video>
@@ -788,7 +838,7 @@
                    <div class="card-content has-text-centered" style="padding: 0.5rem;">
                     <h4 class="title is-5">Active Perception Koch (Sim)</h4>
                     <p style="margin-bottom: 1rem; font-size: 95%;">
-                      Only AAWR reaches 100% by learning to scan workspace effectively; compare to distillation / VIB.
+                      Only AAWR reaches 100% performance thorugh online RL by learning to scan workspace effectively; compared to other baselines like distillation.
                     </p>
                     <div class="video-card">
                       <video src="static/videos/sim/active_perception_koch.mp4" controls muted loop playsinline></video>
