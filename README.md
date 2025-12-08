@@ -1,6 +1,7 @@
 # Real-world RL of Active Perception Behaviors
 
-NeurIPS 2025\
+NeurIPS 2025 & [ARLET Workshop](https://arlet-workshop.github.io/)
+
 [Edward S. Hu](https://www.edwardshu.com/)\*, [Jie Wang](https://everloom-129.github.io/)\*, [Xingfang Yuan](https://www.linkedin.com/in/xingfang-yuan/)\*, [Fiona Luo](https://www.linkedin.com/in/fionalluo/), [Muyao Li](https://www.linkedin.com/in/muyao-lilian-li-04750228a/), [Gaspard Lambrechts](https://people.montefiore.uliege.be/lambrechts/), [Oleh Rybkin](https://people.eecs.berkeley.edu/~oleh/), [Dinesh Jayaraman](https://www.seas.upenn.edu/~dineshj/)
 
 This is the official implementation of the **[Asymmetric Advantage Weighted Regression (AAWR)](https://penn-pal-lab.github.io/aawr)** RL algorithm. AAWR enables efficient online / offline RL in the real world to learn active perception policies.
