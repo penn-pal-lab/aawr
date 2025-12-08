@@ -13,9 +13,6 @@ The key idea is to use privileged sensors during training time to learn high-qua
 - [Paper](https://openreview.net/forum?id=RkdTtznSAL)
 - [Website](https://penn-pal-lab.github.io/aawr/)
 
-> [!NOTE]
-> AAWR codebase under construction, for Neurips 2025 camera ready. If you have any urgent questions, please email the authors.
-
 ## Repo Structure
 The algorithm is in `src/algorithm/asym_awr.py` where we use IQL to train a privileged Q and V  network and do AWR policy extraction. The offline and online RL training is in `src/train_il.py`.
 
