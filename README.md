@@ -23,7 +23,7 @@ Here, we show you how to get AAWR up and running for a toy simulated task.
 
 2. Install the simulated xarm environment code, and generate demos
 ```
-git@github.com:edwhu/gym-xarm.git
+git clone git@github.com:edwhu/gym-xarm.git
 pip install -e .
 python generate_demos.py # generate demo data.
 
